@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
+import NewToDoItem from "./NewToDoItem";
 import Todo from "./Todo";
 const TodoList = () => {
     const todoList = [
@@ -27,16 +28,21 @@ const TodoList = () => {
             desc: 'To do item 4 shot description To do item 4 shot description',
             time: '09-15-2022'
         }
-    ]
+    ];
+
+    const updateTodoList=(updatedTodoItem)=>{
+        console.log(updatedTodoItem);
+    }
     return (
         <>
             <Container>
                 <h3>Todo List</h3>
                 <hr />
+                <NewToDoItem/>
                 <Row>
                     {todoList.map(todo => {
                         return (
-                            <Todo details={todo} key={todo.id}/>
+                            <Todo details={todo} key={todo.id} onUpdateToDoItem={updateTodoList}/>
                         );
                     })}
                 </Row>

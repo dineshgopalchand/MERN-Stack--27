@@ -1,0 +1,18 @@
+.footer-card {
+    padding: 5px;
+}
+.footer-title {
+    color: white;
+    text-transform: capitalize;
+}
+.footer-body,.footer-body a  {
+    color: #cecece;
+}
+.footer-body a  {
+   text-decoration: none;
+}
+.footer-body .icon{
+    color:rgb(199, 66, 4);
+    font-size: 1.5rem;
+}
+

@@ -1,0 +1,6 @@
+.new-todo-item{
+    border:2px solid rgb(168, 168, 168);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 3px 3px gray;
+}

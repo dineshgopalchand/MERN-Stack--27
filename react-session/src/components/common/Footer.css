@@ -3,3 +3,6 @@ footer{
     min-height: 200px;
     color:white;
 }
+.list-group-item{
+    background-color:transparent;
+}
