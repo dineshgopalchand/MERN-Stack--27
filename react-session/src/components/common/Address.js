@@ -3,8 +3,9 @@ import React from 'react';
 import './Address.css';
 const Address = () => {
     return (
-        <>
-            <table>
+
+        <table>
+            <tbody>
                 <tr>
                     <td >
                         <i className="fa-solid fa-location-pin icon"></i>
@@ -31,8 +32,9 @@ const Address = () => {
                         <a href='tel:+91-8494840567'>+91-8494840567</a>
                     </td>
                 </tr>
-            </table>
-        </>
+            </tbody>
+        </table>
+
     );
 }
 

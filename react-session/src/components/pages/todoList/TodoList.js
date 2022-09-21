@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import NewToDoItem from "./NewToDoItem";
 import Todo from "./Todo";
 const TodoList = () => {
-    const todoList = [
+    const [todoList, setTodoList] = useState([
         {
             id: 1,
             title: 'To do item title 1',
@@ -28,21 +28,26 @@ const TodoList = () => {
             desc: 'To do item 4 shot description To do item 4 shot description',
             time: '09-15-2022'
         }
-    ];
+    ]);
 
-    const updateTodoList=(updatedTodoItem)=>{
+    const updateTodoList = (updatedTodoItem) => {
         console.log(updatedTodoItem);
+    }
+    const getNewTodoItemHandler = (newTodo) => {
+        // console.log('getNewTodoItemHandler called');
+        setTodoList([...todoList,newTodo]);
+        console.log(todoList);
     }
     return (
         <>
             <Container>
                 <h3>Todo List</h3>
                 <hr />
-                <NewToDoItem/>
+                <NewToDoItem onNewTodoItem={getNewTodoItemHandler} />
                 <Row>
                     {todoList.map(todo => {
                         return (
-                            <Todo details={todo} key={todo.id} onUpdateToDoItem={updateTodoList}/>
+                            <Todo details={todo} key={todo.id} onUpdateToDoItem={updateTodoList} />
                         );
                     })}
                 </Row>

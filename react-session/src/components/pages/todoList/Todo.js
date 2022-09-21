@@ -23,6 +23,9 @@ const Todo = (props) => {
 
 
     }
+    const editTodo=()=>{
+
+    }
 
     return (
         <Col sm={3} className="my-1">
@@ -33,7 +36,8 @@ const Todo = (props) => {
                     <Card.Text>
                         {desc}
                     </Card.Text>
-                    <Button variant="primary" onClick={updateTitle}>Update To Do</Button>
+                    <Button variant="primary me-2" onClick={updateTitle}>Update To Do</Button>
+                    <Button variant="primary" onClick={editTodo}>Edit</Button>
                     {/* <Button variant="primary" onClick={() => {
                         console.log('updateTitle function call', title)
                         title = 'updated title';
