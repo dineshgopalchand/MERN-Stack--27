@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useState } from "react";
 import { Card, Col, Button } from "react-bootstrap";
 const Todo = (props) => {
@@ -23,7 +24,7 @@ const Todo = (props) => {
 
 
     }
-    const editTodo=()=>{
+    const editTodo = () => {
 
     }
 
@@ -32,7 +33,9 @@ const Todo = (props) => {
             <Card >
                 <Card.Body>
                     <Card.Title>{title}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted" style={{ fontSize: '0.8em' }}>{time}</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 text-muted" style={{ fontSize: '0.8em' }}>
+                        {moment(time).format('DD/MM/yyy')}
+                    </Card.Subtitle>
                     <Card.Text>
                         {desc}
                     </Card.Text>
