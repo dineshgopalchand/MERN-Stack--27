@@ -8,29 +8,29 @@ const todoItemList = [
         id: 1,
         title: 'To do item title 1',
         desc: 'To do item 1 shot description To do item 1 shot description',
-        time: '09-16-2022'
+        time: new Date('09-16-2022')
     },
     {
         id: 2,
         title: 'To do item title 2',
         desc: 'To do item 2 shot description To do item 2 shot description',
-        time: '09-16-2022'
+        time: new Date('09-16-2022')
     },
     {
         id: 3,
         title: 'To do item title 3',
         desc: 'To do item 3 shot description To do item 3 shot description',
-        time: '09-17-2022'
+        time: new Date('09-17-2022')
     },
     {
         id: 4,
         title: 'To do item title 4',
         desc: 'To do item 4 shot description To do item 4 shot description',
-        time: '09-15-2022'
+        time: new Date('09-15-2022')
     }
 ];
 const TodoList = () => {
-    const [todoList, setTodoList] = useState([]);
+    const [todoList, setTodoList] = useState(todoItemList);
     const [todoFormVisibility, setTodoFormVisibility] = useState(false);
 
     const updateTodoList = (updatedTodoItem) => {
