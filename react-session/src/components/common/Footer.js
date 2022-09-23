@@ -8,7 +8,7 @@ const Footer = () => {
     return (
         <>
             <footer >
-                <Row>
+                <Row className="w-100">
                     <Col>
                         <FooterCard title="About Us">
                             <p>SDLC Training is an IT training institute that offers tailor-made courses to students and corporates who intend to hone their IT Skills. Our training portfolio covers programs that span across the Software Development Life Cycle, and hence the name.</p>
