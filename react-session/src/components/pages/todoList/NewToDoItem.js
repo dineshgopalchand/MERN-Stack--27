@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './NewToDoItem.css';
 const NewToDoItem = (props) => {
-    const { onNewTodoItem } = props;
+    const { onNewTodoItem, onFormClose } = props;
     const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('');
     const [dateVal, setDateVal] = useState('');
@@ -20,6 +20,7 @@ const NewToDoItem = (props) => {
         setTitle('');
         setDesc('');
         setDateVal('');
+        onFormClose();
     }
     const titleChangeHandler = (e) => {
         console.log(e);
@@ -30,6 +31,10 @@ const NewToDoItem = (props) => {
     }
     const dateChangeHandler = (e) => {
         setDateVal(e.target.value);
+    }
+    const closeHandler=(event)=>{
+        event.preventDefault();
+        onFormClose();
     }
 
     return (
@@ -47,7 +52,8 @@ const NewToDoItem = (props) => {
                             <input type="date" className="form-control" value={dateVal} onChange={dateChangeHandler} name="date" />
                         </div>
                         <div className="col">
-                            <button className="btn btn-primary form-control" type="submit">Submit</button>
+                            <button className="btn btn-primary px-5" type="submit">Save & close</button>
+                            <button className="btn btn-primary px-5 ms-3" onClick={closeHandler} >close</button>
                         </div>
                     </div>
 

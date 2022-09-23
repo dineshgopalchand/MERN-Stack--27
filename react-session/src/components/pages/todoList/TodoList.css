@@ -1,0 +1,7 @@
+.add-todo-form {
+    cursor: pointer;
+}
+
+.no-todo-list {
+    color: red;
+}
