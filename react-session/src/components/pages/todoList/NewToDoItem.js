@@ -1,26 +1,34 @@
+import moment from "moment";
 import React, { useState } from "react";
 import './NewToDoItem.css';
 const NewToDoItem = (props) => {
-    const { onNewTodoItem, onFormClose } = props;
-    const [title, setTitle] = useState('');
-    const [desc, setDesc] = useState('');
-    const [dateVal, setDateVal] = useState('');
+    const { editItem = {}, isUpdate, onNewTodoItem, onFormClose, onUpdateTodoItem } = props;
+    const [title, setTitle] = useState(editItem.title || '');
+    const [desc, setDesc] = useState(editItem.desc || '');
+    const [time, setTime] = useState(editItem.time ? moment(editItem.time).format('yyyy-MM-DD') : '');
     const submitHandler = (e) => {
         e.preventDefault();
-        // console.log('submitHandler called');
-        // console.log({title,desc,dateVal});
-        // const newToDo = { title: title, desc: desc, time: dateVal };
-        const newToDo = {
-            id:Math.random(),
-            title,
-            desc,
-            time: dateVal
-        };
-        onNewTodoItem(newToDo);
-        setTitle('');
-        setDesc('');
-        setDateVal('');
-        onFormClose();
+        if (title && desc && time) {
+            const toDo = {
+                ...editItem,
+                id: (isUpdate && editItem.id) ? editItem.id : Math.random(),
+                title,
+                desc,
+                time,
+                updatedOn: Date.now()
+            };
+            if ((isUpdate && editItem.id)) {
+                onUpdateTodoItem(toDo);
+            } else {
+                onNewTodoItem(toDo);
+            }
+
+            setTitle('');
+            setDesc('');
+            setTime('');
+            onFormClose();
+        }
+
     }
     const titleChangeHandler = (e) => {
         console.log(e);
@@ -30,9 +38,9 @@ const NewToDoItem = (props) => {
         setDesc(e.target.value);
     }
     const dateChangeHandler = (e) => {
-        setDateVal(e.target.value);
+        setTime(e.target.value);
     }
-    const closeHandler=(event)=>{
+    const closeHandler = (event) => {
         event.preventDefault();
         onFormClose();
     }
@@ -49,10 +57,10 @@ const NewToDoItem = (props) => {
                 <div className="mb-3">
                     <div className="row">
                         <div className="col">
-                            <input type="date" className="form-control" value={dateVal} onChange={dateChangeHandler} name="date" />
+                            <input type="date" className="form-control" value={time} onChange={dateChangeHandler} name="date" />
                         </div>
                         <div className="col">
-                            <button className="btn btn-primary px-5" type="submit">Save & close</button>
+                            <button className="btn btn-primary px-5" type="submit" >Save & close</button>
                             <button className="btn btn-primary px-5 ms-3" onClick={closeHandler} >close</button>
                         </div>
                     </div>

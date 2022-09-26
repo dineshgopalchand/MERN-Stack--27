@@ -10,7 +10,7 @@ const todoItemList = [
         desc: 'To do item 1 shot description To do item 1 shot description',
         time: new Date('09-16-2022').toString(),
         complete: false,
-        updateOn: 1664176526364
+        updatedOn: 1664176526364
     },
     {
         id: 2,
@@ -18,7 +18,7 @@ const todoItemList = [
         desc: 'To do item 2 shot description To do item 2 shot description',
         time: new Date('09-16-2022').toString(),
         complete: false,
-        updateOn: 1664176526365
+        updatedOn: 1664176526365
     },
     {
         id: 3,
@@ -26,7 +26,7 @@ const todoItemList = [
         desc: 'To do item 3 shot description To do item 3 shot description',
         time: new Date('09-17-2022').toString(),
         complete: false,
-        updateOn: 1664176526370
+        updatedOn: 1664176526370
     },
     {
         id: 4,
@@ -34,16 +34,19 @@ const todoItemList = [
         desc: 'To do item 4 shot description To do item 4 shot description',
         time: new Date('09-15-2022').toString(),
         complete: true,
-        updateOn: 1664176526375
+        updatedOn: 1664176526375
     }
 ];
 const TodoList = () => {
     const [todoList, setTodoList] = useState(todoItemList);
     const [todoFormVisibility, setTodoFormVisibility] = useState(false);
+    const [editedTodoItem, setEditedTodoItem] = useState({});
+    const [isUpdate, setIsUpdate] = useState(false);
 
-    const getNewTodoItemHandler = (newTodo) => {
+    const addNewTodoItemHandler = (newTodo) => {
         setTodoList([...todoList, newTodo]);
     }
+
 
     const updateTodoFormVisibility = () => {
         setTodoFormVisibility(!todoFormVisibility);
@@ -61,11 +64,27 @@ const TodoList = () => {
         todoItem = {
             ...todoItem,
             complete: !todoItem.complete,
-            updateOn: Date.now()
+            updatedOn: Date.now()
         };
 
         todoListLocal.splice(todoItemIndex, 1, todoItem);
         setTodoList(todoListLocal);
+    }
+
+    const editButtonClickHandler = (todo) => {
+        setTodoFormVisibility(true);
+        setEditedTodoItem(todo);
+        setIsUpdate(true);
+    }
+
+    const udpateNewTodoItemHandler = (updatedTodo) => {
+        console.log(updatedTodo);
+        const todoListLocal = [...todoList];
+        const todoItemIndex = todoList.findIndex(todo => todo.id === updatedTodo.id);
+        todoListLocal.splice(todoItemIndex, 1, updatedTodo);
+        setTodoList(todoListLocal);
+        setEditedTodoItem({});
+        setIsUpdate(false);
     }
     return (
         <>
@@ -82,13 +101,21 @@ const TodoList = () => {
                     }
                 </h3>
                 <hr />
-                {todoFormVisibility && <NewToDoItem onFormClose={updateTodoFormVisibility} onNewTodoItem={getNewTodoItemHandler} />}
+                {
+                    todoFormVisibility &&
+                    <NewToDoItem
+                        onFormClose={updateTodoFormVisibility}
+                        onNewTodoItem={addNewTodoItemHandler}
+                        isUpdate={isUpdate}
+                        editItem={editedTodoItem}
+                        onUpdateTodoItem={udpateNewTodoItemHandler}
+                    />}
                 <Row>
                     {
                         todoList.length > 0 ? (
                             todoList.map(todo => {
                                 return (
-                                    <Todo details={todo} key={todo.updateOn}  onDeleteTodo={deleteHandler} onCompleteChange={changeCompleteHandler} />
+                                    <Todo details={todo} key={todo.id + '' + todo.updatedOn} onDeleteTodo={deleteHandler} onCompleteChange={changeCompleteHandler} onEditButtonClick={editButtonClickHandler} />
                                 );
                             })
                         ) : (
