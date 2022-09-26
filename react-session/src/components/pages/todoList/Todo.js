@@ -2,10 +2,12 @@ import moment from "moment";
 import React, { useState } from "react";
 import { Card, Col, Button } from "react-bootstrap";
 const Todo = (props) => {
-    const { details, onUpdateToDoItem } = props;
+    const { details, onUpdateToDoItem, onDeleteTodo, onCompleteChange } = props;
+    const [id, setId] = useState(details.id);
     const [title, setTitle] = useState(details.title);
     const [time, setTime] = useState(details.time);
     const [desc, setDesc] = useState(details.desc);
+    const [isCompleted, setIsCompleted] = useState(details.complete);
 
     // console.log(props);
     const updateTitle = () => {
@@ -32,23 +34,21 @@ const Todo = (props) => {
         <Col sm={3} className="my-1">
             <Card >
                 <Card.Body>
-                    <Card.Title>{title}</Card.Title>
+                    <Card.Title style={{cursor:'pointer'}} className={isCompleted ? 'text-decoration-line-through' : ''} onClick={()=>{onCompleteChange(id)} }>
+                        {title}
+                        {isCompleted && <i className="fa-solid fa-check" style={{ color: '#45ce45' }}></i>}
+                    </Card.Title>
                     <Card.Subtitle className="mb-2 text-muted" style={{ fontSize: '0.8em' }}>
                         {moment(time).format('DD/MM/yyy')}
                     </Card.Subtitle>
                     <Card.Text>
                         {desc}
                     </Card.Text>
-                    <Button variant="primary me-2" onClick={updateTitle}>Update To Do</Button>
-                    <Button variant="primary" onClick={editTodo}>Edit</Button>
-                    {/* <Button variant="primary" onClick={() => {
-                        console.log('updateTitle function call', title)
-                        title = 'updated title';
-                        console.log(title);
-                    }}>Update Title</Button> */}
+                    <Button variant="primary ms-1" onClick={editTodo}>Edit</Button >
+                    <Button variant="danger ms-1" onClick={() => onDeleteTodo(id)}>Delete</Button>
                 </Card.Body>
             </Card>
-        </Col>
+        </Col >
     )
 };
 

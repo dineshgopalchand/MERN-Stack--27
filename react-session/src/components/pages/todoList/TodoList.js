@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { Button, Container, Row } from "react-bootstrap";
 import NewToDoItem from "./NewToDoItem";
 import Todo from "./Todo";
@@ -8,25 +8,33 @@ const todoItemList = [
         id: 1,
         title: 'To do item title 1',
         desc: 'To do item 1 shot description To do item 1 shot description',
-        time: new Date('09-16-2022').toString()
+        time: new Date('09-16-2022').toString(),
+        complete: false,
+        updateOn: 1664176526364
     },
     {
         id: 2,
         title: 'To do item title 2',
         desc: 'To do item 2 shot description To do item 2 shot description',
-        time: new Date('09-16-2022').toString()
+        time: new Date('09-16-2022').toString(),
+        complete: false,
+        updateOn: 1664176526365
     },
     {
         id: 3,
         title: 'To do item title 3',
         desc: 'To do item 3 shot description To do item 3 shot description',
-        time: new Date('09-17-2022').toString()
+        time: new Date('09-17-2022').toString(),
+        complete: false,
+        updateOn: 1664176526370
     },
     {
         id: 4,
         title: 'To do item title 4',
         desc: 'To do item 4 shot description To do item 4 shot description',
-        time: new Date('09-15-2022').toString()
+        time: new Date('09-15-2022').toString(),
+        complete: true,
+        updateOn: 1664176526375
     }
 ];
 const TodoList = () => {
@@ -45,6 +53,28 @@ const TodoList = () => {
     const updateTodoFormVisibility = () => {
         setTodoFormVisibility(!todoFormVisibility);
     }
+
+    const deleteHandler = (id) => {
+        const todoListLocal = [...todoList];
+        todoListLocal.splice(todoListLocal.findIndex(todo => todo.id === id), 1)
+        setTodoList(todoListLocal);
+    }
+    const changeCompleteHandler = (id) => {
+        const todoListLocal = [...todoList];
+        const todoItemIndex = todoList.findIndex(todo => todo.id === id);
+        let todoItem = todoList.filter(todo => todo.id === id)[0];
+        todoItem = {
+            ...todoItem,
+            complete: !todoItem.complete,
+            updateOn: Date.now()
+        };
+
+        todoListLocal.splice(todoItemIndex, 1, todoItem);
+        setTodoList(todoListLocal);
+    }
+    useEffect(() => {
+        console.log('Do something after todoList has changed', todoList);
+    }, [todoList]);
     return (
         <>
             <Container>
@@ -66,7 +96,7 @@ const TodoList = () => {
                         todoList.length > 0 ? (
                             todoList.map(todo => {
                                 return (
-                                    <Todo details={todo} key={todo.id} onUpdateToDoItem={updateTodoList} />
+                                    <Todo details={todo} key={todo.updateOn} onUpdateToDoItem={updateTodoList} onDeleteTodo={deleteHandler} onCompleteChange={changeCompleteHandler} />
                                 );
                             })
                         ) : (
