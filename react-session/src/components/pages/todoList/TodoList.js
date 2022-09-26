@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useState } from "react";
 import { Button, Container, Row } from "react-bootstrap";
 import NewToDoItem from "./NewToDoItem";
 import Todo from "./Todo";
@@ -41,13 +41,8 @@ const TodoList = () => {
     const [todoList, setTodoList] = useState(todoItemList);
     const [todoFormVisibility, setTodoFormVisibility] = useState(false);
 
-    const updateTodoList = (updatedTodoItem) => {
-        console.log(updatedTodoItem);
-    }
     const getNewTodoItemHandler = (newTodo) => {
-        // console.log('getNewTodoItemHandler called');
         setTodoList([...todoList, newTodo]);
-        console.log(todoList);
     }
 
     const updateTodoFormVisibility = () => {
@@ -72,9 +67,6 @@ const TodoList = () => {
         todoListLocal.splice(todoItemIndex, 1, todoItem);
         setTodoList(todoListLocal);
     }
-    useEffect(() => {
-        console.log('Do something after todoList has changed', todoList);
-    }, [todoList]);
     return (
         <>
             <Container>
@@ -96,7 +88,7 @@ const TodoList = () => {
                         todoList.length > 0 ? (
                             todoList.map(todo => {
                                 return (
-                                    <Todo details={todo} key={todo.updateOn} onUpdateToDoItem={updateTodoList} onDeleteTodo={deleteHandler} onCompleteChange={changeCompleteHandler} />
+                                    <Todo details={todo} key={todo.updateOn}  onDeleteTodo={deleteHandler} onCompleteChange={changeCompleteHandler} />
                                 );
                             })
                         ) : (
