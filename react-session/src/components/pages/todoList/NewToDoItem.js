@@ -60,7 +60,7 @@ const NewToDoItem = (props) => {
                             <input type="date" className="form-control" value={time} onChange={dateChangeHandler} name="date" />
                         </div>
                         <div className="col">
-                            <button className="btn btn-primary px-5" type="submit" >Save & close</button>
+                            <button className="btn btn-primary px-5" type="submit" disabled={!(title && desc && time)} >Save & close</button>
                             <button className="btn btn-primary px-5 ms-3" onClick={closeHandler} >close</button>
                         </div>
                     </div>
