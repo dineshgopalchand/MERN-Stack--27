@@ -13,7 +13,7 @@ const Todo = (props) => {
 
     return (
         <Col sm={3} className="my-1">
-            <Card >
+            <Card className="h-100">
                 <Card.Body>
                     <Card.Title style={{ cursor: 'pointer' }} className={todo.isCompleted ? 'text-decoration-line-through' : ''} onClick={() => { onCompleteChange(todo.id) }}>
                         {todo.title}
