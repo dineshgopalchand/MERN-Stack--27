@@ -1,0 +1,11 @@
+> Environment and project setup - Done
+> Introducing JSX - Done
+> Rendering Elements - Done
+> Components and Props - Done
+> State and Lifecycle - Done
+> Handling Events - Done
+> Conditional Rendering - Done
+> Lists and Keys - Done
+> Forms - Done
+> Lifting State Up - Done
+> Styling - 3rd party module/ React css module
