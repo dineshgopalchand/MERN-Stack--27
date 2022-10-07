@@ -46,3 +46,8 @@ export const FormSubmitButton = styled.button`
     }
 `;
 
+export const FormResetButton = styled(FormSubmitButton)`
+    background-color: gray;
+    margin-left:2px;
+`;
+

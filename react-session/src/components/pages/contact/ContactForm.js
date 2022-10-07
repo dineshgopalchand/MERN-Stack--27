@@ -1,5 +1,5 @@
 import react, { useState } from 'react';
-import { FormInput, FormSubmitButton } from '../../UI/FormElements';
+import { FormInput, FormResetButton, FormSubmitButton } from '../../UI/FormElements';
 // import './ContactForm.css';
 
 const ContactForm = () => {
@@ -52,6 +52,7 @@ const ContactForm = () => {
             </FormInput>
             <FormInput>
                 <FormSubmitButton type="submit" >Submit</FormSubmitButton>
+                <FormResetButton>Reset</FormResetButton>
             </FormInput>
         </form>
     )
