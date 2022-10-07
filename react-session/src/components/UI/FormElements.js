@@ -13,22 +13,17 @@ export const FormInput = styled.div`
         padding: 2px 5px;
         
         & input{
-            border: 1px solid #5F9DF7;
+            border: 1px solid ${props => props.danger ? '#B73E3E' : '#5F9DF7'};
             border-radius:5px;
-            color: #3e3e3e;
+            color: ${props => props.danger ? '#B73E3E' : '#3e3e3e'};
             outline: none;
         }
         & input:hover,
         & input:focus,
         & input:focus-visible {
-            box-shadow: 1px 2px 2px #5F9DF7;
+            box-shadow: 1px 2px 2px ${props => props.danger ? '#B73E3E' : '#5F9DF7'};
         }
         
-        &.invalid input {
-            box-shadow: 1px 2px 2px #B73E3E;
-            border: 1px solid #B73E3E;
-            color: #B73E3E;
-        }
         & label {
             width: 30%;
             text-transform: capitalize;
