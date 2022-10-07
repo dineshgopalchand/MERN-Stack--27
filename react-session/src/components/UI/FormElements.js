@@ -7,24 +7,27 @@ import styled from 'styled-components';
 //     }
 // );
 
-export const FormElement = styled.div`
+export const FormInput = styled.div`
         display: flex;
         margin: 2px;
         padding: 2px 5px;
         
         & input{
-            border: 1px solid gray;
+            border: 1px solid #5F9DF7;
+            border-radius:5px;
+            color: #3e3e3e;
+            outline: none;
         }
-
         & input:hover,
-        & input:focus {
-            box-shadow: 1px 2px 2px gray;
-            border:  1px solid blue;
+        & input:focus,
+        & input:focus-visible {
+            box-shadow: 1px 2px 2px #5F9DF7;
         }
         
         &.invalid input {
-            border: 1px solid red;
-            color: red;
+            box-shadow: 1px 2px 2px #B73E3E;
+            border: 1px solid #B73E3E;
+            color: #B73E3E;
         }
         & label {
             width: 30%;
