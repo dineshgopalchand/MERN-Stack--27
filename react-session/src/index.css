@@ -1,4 +1,8 @@
 /* @import url("bootstrap/dist/css/bootstrap.min.css"); */
+:root{
+  --error-elememt: #B73E3E;
+  --primary-elememt: #5f9df7;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",

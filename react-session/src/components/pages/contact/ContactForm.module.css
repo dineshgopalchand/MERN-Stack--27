@@ -1,0 +1,46 @@
+.formelement {
+    display: flex;
+    margin: 2px;
+    padding: 2px 5px;
+}
+.form-element label {
+    width: 30%;
+    text-transform: capitalize;
+}
+.form-field {
+    width: 50%;
+    border: 1px solid var(--primary-elememt); 
+    border-radius: 5px;
+    color: #3e3e3e;
+    outline: none;
+    margin: 5px;
+}
+
+.form-field:hover,
+.form-field:focus,
+.form-field:focus-visible {
+    box-shadow: 1px 2px 2px var(--primary-elememt); 
+}
+
+
+.invalid .form-field {
+    border: 1px solid var(--error-elememt);
+    color: var(--error-elememt);
+   
+}
+
+.invalid .form-field:hover,
+.invalid .form-field:focus,
+.invalid .form-field:focus-visible {
+    box-shadow: 1px 2px 2px var(--error-elememt); 
+}
+
+.button[type="submit"] {
+    background-color: purple;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+}
+.button[type="submit"]:hover {
+    box-shadow: 1px 2px 2px rgb(46, 46, 46);
+}
