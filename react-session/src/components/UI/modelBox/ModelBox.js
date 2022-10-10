@@ -1,18 +1,13 @@
-import React, { Fragment } from "react";
+import ModelBoxContent from "./ModelBoxContent";
+import ReactDOM from "react-dom";
 
-const ModelBox = () => {
+const ModelBox = (props) => {
     return (
         <>
-            <React.Fragment key='some'>
-                Model Box
-            </React.Fragment>
-            <Fragment key='some'>
-                Model Box
-            </Fragment>
-            <>
-                Model Box
-            </>
+            {
+                ReactDOM.createPortal( <ModelBoxContent {...props}/>,document.getElementById('modalbox-root'))
+            }
         </>
     )
-};
+}
 export default ModelBox;

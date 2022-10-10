@@ -10,6 +10,9 @@
 > Lifting State Up - Done
 > Styling - 
     >>Styled Component - Done
-    >>React css module
->Portals
+    >>React css module - Done
+>Portals 
 >Refs
+>effect
+>Reducer
+>context
