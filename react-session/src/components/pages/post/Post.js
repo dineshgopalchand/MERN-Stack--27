@@ -1,6 +1,8 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { Container } from 'react-bootstrap'
+
 
 const Post = () => {
     const [posts, setPosts] = useState([]);
@@ -12,12 +14,21 @@ const Post = () => {
 
     useEffect(() => {
         console.log('form useEffect with empty array as deps');
-        fetch('http://localhost:3030/posts')
-            .then(res => res.json())
-            .then(val => {
-                console.log(val);
-                setPosts(val);
-            });
+        axios.get('http://localhost:3030/posts')
+        .then(res=>{
+            console.log(res.data);
+            setPosts(res.data);
+        }).catch(err=>{
+            console.log({err});
+        }).finally(()=>{
+            console.log('finally get called');
+        })
+        // fetch('http://localhost:3030/posts')
+        //     .then(res => res.json())
+        //     .then(val => {
+        //         console.log(val);
+        //         setPosts(val);
+        //     });
 
     }, []);
 
@@ -25,7 +36,7 @@ const Post = () => {
         console.log('form useEffect with post  as deps');
     }, [posts]);
 
-    console.log('from outer');
+    // console.log('from outer');
 
 
 
