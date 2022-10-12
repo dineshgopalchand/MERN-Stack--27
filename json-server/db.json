@@ -80,9 +80,18 @@
     }
   ],
   "comments": [],
-  "profile": {
-    "name": "typicode"
-  },
+  "users": [
+    {
+      "name": "Dinesh",
+      "username": "dinesh",
+      "password": "pass@123"
+    },
+    {
+      "name": "Dinesh Gopal Chand",
+      "username": "dgchand",
+      "password": "pass@123"
+    }
+  ],
   "album": [
     {
       "albumId": 1,
