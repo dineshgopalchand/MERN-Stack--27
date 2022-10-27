@@ -4,59 +4,57 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import styles from './LoginForm.module.css';
 const ACTION = {
-    update_email: 'UPDATE_EMAIL_VALUE'
+    update_email: 'UPDATE_EMAIL_VALUE',
+    update_password: 'UPDATE_PASSWORD_VALUE'
 }
+const emailRegex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
 
-const emailReducer = (state, action) => {
+const loginFormReducer = (state, action) => {
     switch (action.type) {
         case ACTION.update_email:
-            return action.value;
+            const emailVal = action.value;
+            const emailErr = emailVal.match(emailRegex) == null ? true : false;
+            return { ...state, email: { value: emailVal, error: emailErr } };
+
+        case ACTION.update_password:
+            const passVal = action.value;
+            const passError = passVal.length === 0 ? true : false;
+            return {
+                ...state, password: {
+                    value: passVal,
+                    error: passError
+                }
+            }
         default:
             return state;
     }
-}
+
+};
 
 const LoginForm = () => {
-    // const [emailVal, setEmailVal] = useState('');
-    const [emailVal, emailDispatch] = useReducer(emailReducer, '');
-    const [passwordVal, setPasswordVal] = useState('');
-    const [emailError, setEmailError] = useState(false);
-    const [passwordError, setPasswordError] = useState(false);
-
-
-
-
-    const emailChangeHandler = (e) => {
-        const emailValue = e.target.value.trim();
-        const emailRegex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
-        setEmailError(emailValue.match(emailRegex) == null ? true : false);
-
-        console.log(emailValue);
-        emailDispatch(
-            {
-                type: ACTION.update_email,
-                value: emailValue
-            }
-        );
+    const formInit = {
+        email: {
+            value: '',
+            error: false
+        },
+        password: {
+            value: '',
+            error: false
+        }
     }
-    const passwordChangeHandler = (e) => {
-        const passVal = e.target.value.trim();
-        console.log(passVal);
-        setPasswordError(passVal.length === 0 ? true : false);
-        setPasswordVal(passVal);
-    }
+    const [formError, setFormError] = useState(true);
+    const [loginForm, loginFormDispatch] = useReducer(loginFormReducer, formInit);
+
+
     const formSubmitHandler = (e) => {
         e.preventDefault();
-        console.log({ emailVal, passwordVal });
+        console.log({ email: loginForm.email.value, password: loginForm.password.value });
     }
 
     useEffect(() => {
-        console.log('useEffect with no dep');
-    })
-    useEffect(() => {
-        console.log('error changed');
-        console.log({ emailError, passwordError });
-    }, [emailError, passwordError]);
+        setFormError(loginForm.email.error || loginForm.password.error || loginForm.email.value === '' || loginForm.password.value === '')
+    }, [loginForm.email.error, loginForm.password.error, loginForm.email.value, loginForm.password.value]);
+
     return (
         <>
             <form onSubmit={formSubmitHandler}>
@@ -66,21 +64,35 @@ const LoginForm = () => {
                         name="email" className="form-control border border-primary"
                         id="exampleInputEmail1"
                         aria-describedby="emailHelp"
-                        value={emailVal}
-                        onChange={emailChangeHandler} />
-                    {emailError && <p className={styles['error-msg']}>Email ID is not valid</p>}
+                        value={loginForm.email.value}
+                        onChange={(event) => {
+                            loginFormDispatch(
+                                {
+                                    type: ACTION.update_email,
+                                    value: event.target.value.trim()
+                                }
+                            );
+                        }} />
+                    {loginForm.email.error && <p className={styles['error-msg']}>Email ID is not valid</p>}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                     <input type="password" name="password"
                         className="form-control border border-primary"
-                        value={passwordVal}
-                        id="exampleInputPassword1" onChange={passwordChangeHandler} />
-                    {passwordError && <p className={styles['error-msg']}>please provide password</p>}
+                        value={loginForm.password.value}
+                        id="exampleInputPassword1" onChange={(event) => {
+                            loginFormDispatch(
+                                {
+                                    type: ACTION.update_password,
+                                    value: event.target.value
+                                }
+                            );
+                        }} />
+                    {loginForm.password.error && <p className={styles['error-msg']}>please provide password</p>}
                 </div>
                 <p className="small"><a className="text-primary" href="forget-password.html">Forgot password?</a></p>
                 <div className="d-grid">
-                    <button className="btn btn-primary" type="submit" disabled={(emailError || passwordError) ? true : false}>Login</button>
+                    <button className="btn btn-primary" type="submit" disabled={formError}>Login</button>
                 </div>
             </form>
         </>
