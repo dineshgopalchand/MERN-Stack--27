@@ -4,6 +4,7 @@ import Footer from "./components/common/Footer";
 import Header from "./components/common/Header";
 import Contact from "./components/pages/contact/Contact";
 import Home from "./components/pages/home/Home";
+import  Login  from "./components/pages/login/Login";
 import Post from "./components/pages/post/Post";
 import TodoList from "./components/pages/todoList/TodoList";
 const App = () => {
@@ -16,7 +17,8 @@ const App = () => {
         {/* <Home /> */}
         {/* <TodoList /> */}
         {/* <Contact /> */}
-        <Post />
+        {/* <Post /> */}
+        <Login />
       </Card.Body>
       <Card.Footer className="p-0 mt-3">
         <Footer />
