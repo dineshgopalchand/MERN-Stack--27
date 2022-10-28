@@ -2,10 +2,12 @@ import React from 'react';
 import { useReducer } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import Loader from '../../UI/loader/Loader';
 import styles from './LoginForm.module.css';
 const ACTION = {
     update_email: 'UPDATE_EMAIL_VALUE',
-    update_password: 'UPDATE_PASSWORD_VALUE'
+    update_password: 'UPDATE_PASSWORD_VALUE',
+    update_loader: 'UPDATE_LOADER_STATUS'
 }
 const emailRegex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
 
@@ -25,6 +27,8 @@ const loginFormReducer = (state, action) => {
                     error: passError
                 }
             }
+        case ACTION.update_loader:
+            return { ...state, formloader: action.value };
         default:
             return state;
     }
@@ -40,19 +44,82 @@ const LoginForm = () => {
         password: {
             value: '',
             error: false
-        }
+        },
+        formloader: false
     }
-    const [formError, setFormError] = useState(true);
+    const [formError, setFormError] = useState({
+        error: true, message: ''
+    });
     const [loginForm, loginFormDispatch] = useReducer(loginFormReducer, formInit);
 
+    const validateSignIn = async (email, password) => {
+        // Login API call replication 
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (email === 'dinesh@gmail.com' && password === 'pass123') {
+                    resolve({
+                        successType: 'success',
+                        statusCode: 10,
+                        method: 'User login',
+                        userDetails: {
+                            name: 'Dinesh',
+                            email: 'dinesh@gmail.com',
+                            location: 'BLR'
+                        },
+                        message: 'user login susccessfull'
+                    });
 
-    const formSubmitHandler = (e) => {
+                } else {
+                    resolve({
+                        successType: 'fail',
+                        statusCode: 11,
+                        method: 'User login',
+                        message: 'email/password is incorrect'
+                    });
+                }
+            }, 3000);
+        });
+
+    }
+    const formSubmitHandler = async (e) => {
         e.preventDefault();
-        console.log({ email: loginForm.email.value, password: loginForm.password.value });
+        const email = loginForm.email.value;
+        const password = loginForm.password.value;
+        console.log({ email, password });
+        // Rest api call to validate username/password
+        loginFormDispatch({
+            type: ACTION.update_loader,
+            value: true
+        });
+        const response = await validateSignIn(email, password);
+        loginFormDispatch({
+            type: ACTION.update_loader,
+            value: false
+        });
+        console.log(response);
+        if (response.statusCode === 11) {
+            setFormError({
+                error: true,
+                message: response.message
+            });
+        }
+        if (response.statusCode === 10) {
+            setFormError({
+                error: false,
+                message: response.message
+            });
+        }
+
     }
 
     useEffect(() => {
-        setFormError(loginForm.email.error || loginForm.password.error || loginForm.email.value === '' || loginForm.password.value === '')
+        setFormError({
+            message: '',
+            error: loginForm.email.error ||
+                loginForm.password.error ||
+                loginForm.email.value === '' ||
+                loginForm.password.value === ''
+        });
     }, [loginForm.email.error, loginForm.password.error, loginForm.email.value, loginForm.password.value]);
 
     return (
@@ -92,7 +159,9 @@ const LoginForm = () => {
                 </div>
                 <p className="small"><a className="text-primary" href="forget-password.html">Forgot password?</a></p>
                 <div className="d-grid">
-                    <button className="btn btn-primary" type="submit" disabled={formError}>Login</button>
+                    <button className="btn btn-primary " type="submit" disabled={formError.error}>Login </button>
+                    {loginForm.formloader && <Loader />}
+                    <p style={{ color: formError.error ? 'red' : 'green', fontSize: '0.8rem' }}>{formError.message}</p>
                 </div>
             </form>
         </>
