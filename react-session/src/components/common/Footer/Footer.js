@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import Address from "./Address";
+import Address from "../Address/Address";
 import Copyright from "./Copyright";
 import './Footer.css';
 import FooterCard from "./FooterCard";
