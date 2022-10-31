@@ -35,7 +35,8 @@ const loginFormReducer = (state, action) => {
 
 };
 
-const LoginForm = () => {
+const LoginForm = (props) => {
+    const loginHandler=props.onLogin;
     const formInit = {
         email: {
             value: '',
@@ -66,6 +67,7 @@ const LoginForm = () => {
                             email: 'dinesh@gmail.com',
                             location: 'BLR'
                         },
+                        token:'fww3324asdfsadasdss',
                         message: 'user login susccessfull'
                     });
 
@@ -97,13 +99,14 @@ const LoginForm = () => {
             value: false
         });
         console.log(response);
-        if (response.statusCode === 11) {
+        if (response.statusCode === 11) { // error
             setFormError({
                 error: true,
                 message: response.message
             });
         }
-        if (response.statusCode === 10) {
+        if (response.statusCode === 10) { // successfull
+            loginHandler(response.token,response.userDetails)
             setFormError({
                 error: false,
                 message: response.message

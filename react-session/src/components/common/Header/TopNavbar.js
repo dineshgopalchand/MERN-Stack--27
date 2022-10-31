@@ -1,12 +1,11 @@
 import React from "react";
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import HeaderLogin from "./HeaderLogin";
 
-const TopNavbar = () => {
+const TopNavbar = (props) => {
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
             <Container fluid>
@@ -34,15 +33,7 @@ const TopNavbar = () => {
                         </NavDropdown>
                         <Nav.Link href="#">About us</Nav.Link>
                     </Nav>
-                    <Form className="d-flex">
-                        <Form.Control
-                            type="search"
-                            placeholder="Search"
-                            className="me-2"
-                            aria-label="Search"
-                        />
-                        <Button variant="outline-success">Search</Button>
-                    </Form>
+                    <HeaderLogin {...props} />
                 </Navbar.Collapse>
             </Container>
         </Navbar>
