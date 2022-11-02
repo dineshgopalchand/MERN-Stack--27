@@ -8,11 +8,9 @@ import Login from "./components/pages/login/Login";
 import Post from "./components/pages/post/Post";
 import TodoList from "./components/pages/todoList/TodoList";
 import './App.css';
-const initLoginState = {
-  isLogin: false,
-  loginToken: '',
-  userDetails: {}
-};
+import { AuthContext, initLoginState } from './store/auth-context';
+
+
 const App = () => {
   const [loginDetails, setLoginDetails] = useState(initLoginState);
   useEffect(() => {
@@ -22,7 +20,7 @@ const App = () => {
   }, []);
 
   const userLoginHandler = (loginToken, userDetails) => {
-    if (userDetails.name && loginToken) {
+    if (userDetails?.name && loginToken) {
       window.localStorage.setItem('login_token', loginToken);
       window.localStorage.setItem('user_details', JSON.stringify(userDetails));
       setLoginDetails(() => {
@@ -39,28 +37,38 @@ const App = () => {
   }
   // console.log(loginDetails)
   return (
-    <Card className="vh-100 overflow-auto">
-      <Card.Header className="p-0 main-header">
-        <Header loginDetails={loginDetails} onLogout={userLogoutHandler} />
-      </Card.Header>
-      <Card.Body className="p-0">
-        {loginDetails.isLogin ? (
-          <>
-            {/* <Home /> */}
-            <TodoList />
-            {/* <Contact /> */}
-            {/* <Post /> */}</>
-        ) : (
-          <>
-            <Login onLogin={userLoginHandler} />
-          </>
-        )}
+    <AuthContext.Provider value={{ ...loginDetails, userLoginHandler, userLogoutHandler }}>
+      <AuthContext.Consumer>
+        {(authCtx) => {
+          const { isLogin } = authCtx;
+          return <Card className="vh-100 overflow-auto">
+            <Card.Header className="p-0 main-header">
+              <Header loginDetails={loginDetails} onLogout={userLogoutHandler} />
+            </Card.Header>
+            <Card.Body className="p-0">
+              {isLogin ? (
+                <>
+                  {/* <Home /> */}
+                  <TodoList />
+                  {/* <Contact /> */}
+                  {/* <Post /> */}</>
+              ) : (
+                <>
+                  <Login onLogin={userLoginHandler} />
+                </>
+              )}
 
-      </Card.Body>
-      <Card.Footer className="p-0 mt-3">
-        <Footer />
-      </Card.Footer>
-    </Card>
+            </Card.Body>
+            <Card.Footer className="p-0 mt-3">
+              <Footer />
+            </Card.Footer>
+          </Card>
+        }
+
+        }
+
+      </AuthContext.Consumer>
+    </AuthContext.Provider>
   );
 }
 
