@@ -43,7 +43,7 @@ const App = () => {
           const { isLogin } = authCtx;
           return <Card className="vh-100 overflow-auto">
             <Card.Header className="p-0 main-header">
-              <Header loginDetails={loginDetails} onLogout={userLogoutHandler} />
+              <Header  />
             </Card.Header>
             <Card.Body className="p-0">
               {isLogin ? (

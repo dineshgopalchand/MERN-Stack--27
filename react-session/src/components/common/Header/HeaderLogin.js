@@ -1,25 +1,33 @@
 import React from 'react'
 import { Col, Nav, Row } from 'react-bootstrap'
+import { AuthContext } from '../../../store/auth-context';
 
-const HeaderLogin = (props) => {
-    console.log(props);
-    const { loginDetails, onLogout: logoutHandler } = props;
+const HeaderLogin = () => {
     return (
-        <Nav>
-            <Row>
-                {
-                    loginDetails.isLogin && <>
-                        <Col style={{ width: '250px' }}>
-                            <Nav.Link > Welcome {loginDetails.userDetails.name}</Nav.Link>
-                        </Col>
-                    </>
-                }
-                <Col>
-                    {!loginDetails.isLogin ? <Nav.Link >Login</Nav.Link> : <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>}
-                </Col>
+        <AuthContext.Consumer>
+            {(authCtx) => {
+                console.log({ authCtx });
+                const { isLogin, userLogoutHandler, userDetails } = authCtx;
+                return (
+                    <Nav>
+                        <Row>
+                            {
+                                isLogin && <>
+                                    <Col style={{ width: '250px' }}>
+                                        <Nav.Link > Welcome {userDetails.name}</Nav.Link>
+                                    </Col>
+                                </>
+                            }
+                            <Col>
+                                {!isLogin ? <Nav.Link >Login</Nav.Link> : <Nav.Link onClick={userLogoutHandler}>Logout</Nav.Link>}
+                            </Col>
 
-            </Row>
-        </Nav>
+                        </Row>
+                    </Nav>
+                )
+            }}
+
+        </AuthContext.Consumer>
     )
 }
 

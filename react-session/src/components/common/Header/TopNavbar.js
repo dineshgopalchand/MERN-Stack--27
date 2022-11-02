@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import HeaderLogin from "./HeaderLogin";
 
-const TopNavbar = (props) => {
+const TopNavbar = () => {
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
             <Container fluid>
@@ -33,7 +33,7 @@ const TopNavbar = (props) => {
                         </NavDropdown>
                         <Nav.Link href="#">About us</Nav.Link>
                     </Nav>
-                    <HeaderLogin {...props} />
+                    <HeaderLogin />
                 </Navbar.Collapse>
             </Container>
         </Navbar>
