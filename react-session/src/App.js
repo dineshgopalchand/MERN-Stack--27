@@ -54,7 +54,7 @@ const App = () => {
                   {/* <Post /> */}</>
               ) : (
                 <>
-                  <Login onLogin={userLoginHandler} />
+                  <Login />
                 </>
               )}
 

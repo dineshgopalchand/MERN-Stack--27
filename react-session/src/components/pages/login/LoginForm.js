@@ -1,7 +1,9 @@
 import React from 'react';
 import { useReducer } from 'react';
+import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { AuthContext } from '../../../store/auth-context';
 import Loader from '../../UI/loader/Loader';
 import styles from './LoginForm.module.css';
 const ACTION = {
@@ -35,8 +37,8 @@ const loginFormReducer = (state, action) => {
 
 };
 
-const LoginForm = (props) => {
-    const loginHandler=props.onLogin;
+const LoginForm = () => {
+    const { userLoginHandler } = useContext(AuthContext);
     const formInit = {
         email: {
             value: '',
@@ -67,7 +69,7 @@ const LoginForm = (props) => {
                             email: 'dinesh@gmail.com',
                             location: 'BLR'
                         },
-                        token:'fww3324asdfsadasdss',
+                        token: 'fww3324asdfsadasdss',
                         message: 'user login susccessfull'
                     });
 
@@ -106,7 +108,7 @@ const LoginForm = (props) => {
             });
         }
         if (response.statusCode === 10) { // successfull
-            loginHandler(response.token,response.userDetails)
+            userLoginHandler(response.token, response.userDetails)
             setFormError({
                 error: false,
                 message: response.message
