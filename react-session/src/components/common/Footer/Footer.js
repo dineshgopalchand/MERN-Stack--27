@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Col, Row } from "react-bootstrap";
 import Address from "../Address/Address";
 import Copyright from "./Copyright";
@@ -37,4 +37,4 @@ const Footer = () => {
     );
 }
 
-export default Footer;
+export default memo(Footer);
