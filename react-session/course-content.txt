@@ -8,11 +8,16 @@
 > Lists and Keys - Done
 > Forms - Done
 > Lifting State Up - Done
-> Styling - 
+> Styling - Done
     >>Styled Component - Done
     >>React css module - Done
 >Portals  - Done
 >Refs(useRef) - Done
->effect -..
->Reducer
->context
+>effect - Done
+>Reducer - Done
+>context - Done
+> Redux & redux toolkit
+> Router
+> Api call
+> React with TypeScript
+> introduct of nextjs

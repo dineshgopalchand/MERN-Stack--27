@@ -6,7 +6,8 @@ import '@fortawesome/fontawesome-free/css/brands.min.css';
 import '@fortawesome/fontawesome-free/css/solid.min.css';
 import './index.css';
 import App from './App';
-import { AuthProvider } from './store/auth-context';
+import { AuthProvider } from './store/AuthProvider';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
