@@ -10,6 +10,7 @@ import TodoList from "./components/pages/todoList/TodoList";
 import './App.css';
 import { AuthContext } from './store/auth-context';
 import { useContext } from "react";
+import ContactForm from "./components/pages/contact-form/ContactForm";
 
 
 const App = () => {
@@ -22,18 +23,19 @@ const App = () => {
         <Header />
       </Card.Header>
       <Card.Body className="p-0">
-        {isLogin ? (
-          <>
-            {/* <Home /> */}
-            <TodoList />
-            {/* <Contact /> */}
-            {/* <Post /> */}</>
-        ) : (
-          <>
-            <Login />
-          </>
-        )}
-
+          {isLogin ? (
+            <>
+              {/* <Home /> */}
+              {/* <TodoList /> */}
+              {/* <Contact /> */}
+              {/* <Post /> */}
+              <ContactForm />
+            </>
+          ) : (
+            <>
+              <Login />
+            </>
+          )}
       </Card.Body>
       <Card.Footer className="p-0 mt-3">
         <Footer />

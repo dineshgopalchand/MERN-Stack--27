@@ -1,0 +1,12 @@
+.contact-image{
+    width: 100%;
+}
+.errorfield{
+    color:red
+}
+.errorfield input,.error-field textarea{
+    background-color:rgb(243, 195, 195);
+}
+.errordetails{
+    font-size: 0.65em;
+}
