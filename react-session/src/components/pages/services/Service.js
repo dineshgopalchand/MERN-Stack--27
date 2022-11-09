@@ -2,21 +2,24 @@ import { Button, IconButton } from '@mui/material';
 // import Button from '@mui/material/Button';
 import React from 'react'
 // import classes from './Service.module.css';
+import { FaShoppingCart } from 'react-icons/fa';
+import { FcAlarmClock } from 'react-icons/fc'
+import { MdOutlineDeleteOutline } from 'react-icons/md'
 const Service = () => {
     return (
         <div>
             <Button variant="contained">Hello World</Button>
             <IconButton aria-label="delete">
-               Delete
+                <MdOutlineDeleteOutline />
             </IconButton>
             <IconButton aria-label="delete" disabled color="primary">
-                delete
+                <MdOutlineDeleteOutline />
             </IconButton>
             <IconButton color="secondary" aria-label="add an alarm">
-                alarm
+                <FcAlarmClock />
             </IconButton>
             <IconButton color="primary" aria-label="add to shopping cart">
-                cart
+                <FaShoppingCart />
             </IconButton>
         </div>
     );
