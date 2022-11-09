@@ -11,6 +11,7 @@ import './App.css';
 import { AuthContext } from './store/auth-context';
 import { useContext } from "react";
 import ContactForm from "./components/pages/contact-form/ContactForm";
+import Service from "./components/pages/services/Service";
 
 
 const App = () => {
@@ -29,7 +30,8 @@ const App = () => {
               {/* <TodoList /> */}
               {/* <Contact /> */}
               {/* <Post /> */}
-              <ContactForm />
+              {/* <ContactForm /> */}
+              <Service/>
             </>
           ) : (
             <>
