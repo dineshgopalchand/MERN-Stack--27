@@ -12,6 +12,8 @@ import { AuthContext } from './store/auth-context';
 import { useContext } from "react";
 import ContactForm from "./components/pages/contact-form/ContactForm";
 import Service from "./components/pages/services/Service";
+import SampleUseMemo from "./hooks/SampleUseMemo";
+
 
 
 const App = () => {
@@ -24,20 +26,21 @@ const App = () => {
         <Header />
       </Card.Header>
       <Card.Body className="p-0">
-          {isLogin ? (
-            <>
-              {/* <Home /> */}
-              {/* <TodoList /> */}
-              {/* <Contact /> */}
-              {/* <Post /> */}
-              {/* <ContactForm /> */}
-              <Service/>
-            </>
-          ) : (
-            <>
-              <Login />
-            </>
-          )}
+        {isLogin ? (
+          <>
+            {/* <Home /> */}
+            {/* <TodoList /> */}
+            {/* <Contact /> */}
+            {/* <Post /> */}
+            {/* <ContactForm /> */}
+            {/* <Service/> */}
+            <SampleUseMemo />
+          </>
+        ) : (
+          <>
+            <Login />
+          </>
+        )}
       </Card.Body>
       <Card.Footer className="p-0 mt-3">
         <Footer />
