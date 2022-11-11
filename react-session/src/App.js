@@ -13,6 +13,7 @@ import { useContext } from "react";
 import ContactForm from "./components/pages/contact-form/ContactForm";
 import Service from "./components/pages/services/Service";
 import SampleUseMemo from "./hooks/SampleUseMemo";
+import SampleUseCallback from "./hooks/sampleUseCallback/SampleUseCallback";
 
 
 
@@ -34,7 +35,8 @@ const App = () => {
             {/* <Post /> */}
             {/* <ContactForm /> */}
             {/* <Service/> */}
-            <SampleUseMemo />
+            {/* <SampleUseMemo /> */}
+            <SampleUseCallback/>
           </>
         ) : (
           <>
