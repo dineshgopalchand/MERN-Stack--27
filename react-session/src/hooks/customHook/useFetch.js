@@ -5,6 +5,7 @@ const useFetch = (url) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(null);
     const [error, setError] = useState(null);
+    const [responseHeader, setResponseHeader] = useState(null);
 
     const doFetch = useCallback((option = {}) => {
         const source = axios.CancelToken.source();
@@ -17,10 +18,12 @@ const useFetch = (url) => {
         setLoading('loading...')
         setData(null);
         setError(null);
+        setResponseHeader(null);
 
         axios(config)
             .then(res => {
                 setLoading(false);
+                setResponseHeader(res.headers);
                 setData(res.data);
             })
             .catch(err => {
@@ -31,7 +34,7 @@ const useFetch = (url) => {
             source.cancel();
         }
     }, [url]);
-    return [{ data, loading, error }, doFetch];
+    return [{ data, loading, error, header: responseHeader }, doFetch];
 }
 
 export default useFetch;
