@@ -8,6 +8,7 @@ const useFetch = (url) => {
     const [responseHeader, setResponseHeader] = useState(null);
 
     const doFetch = useCallback((option = {}) => {
+        if (!url) return;
         const source = axios.CancelToken.source();
         const config = {
             method: 'get',
