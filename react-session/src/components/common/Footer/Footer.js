@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import { Col, Row } from "react-bootstrap";
+import SpecialQuote from "../../Features/SpecialQuote/SpecialQuote";
 import Address from "../Address/Address";
 import Copyright from "./Copyright";
 import './Footer.css';
@@ -15,7 +16,7 @@ const Footer = () => {
                         </FooterCard>
                     </Col>
                     <Col>
-                        <FooterCard title="Easy Access">
+                        {/* <FooterCard title="Easy Access">
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item"><a href="#home">Home</a></li>
                                 <li className="list-group-item"><a href="#about">About us</a></li>
@@ -23,6 +24,9 @@ const Footer = () => {
                                 <li className="list-group-item"><a href="#contact">Contact us</a></li>
                                 <li className="list-group-item"><a href="#reviews">Reviews</a></li>
                             </ul>
+                        </FooterCard> */}
+                        <FooterCard title="Special Quote">
+                           <SpecialQuote/>
                         </FooterCard>
                     </Col>
                     <Col>
