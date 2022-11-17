@@ -1,0 +1,10 @@
+
+.App{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-color: gray;
+}
+.main-container{
+  flex:1 1 auto;
+}
