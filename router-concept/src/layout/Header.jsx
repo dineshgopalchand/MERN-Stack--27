@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
@@ -15,6 +14,7 @@ import { Badge, Menu } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import { Link } from "react-router-dom";
 
 const pages = [
   { name: "Home", link: "home" },
@@ -22,7 +22,12 @@ const pages = [
   { name: "Contact", link: "contact" },
   { name: "About", link: "about" },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = [
+  { name: "Profile", link: "profile" },
+  { name: "Account", link: "account" },
+  { name: "Dashboard", link: "dashboard" },
+  { name: "Logout", link: "logout" },
+];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -56,8 +61,8 @@ const Header = () => {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -105,8 +110,8 @@ const Header = () => {
                   <Typography
                     textAlign="center"
                     noWrap
-                    component="a"
-                    href={page.link}
+                    component={Link}
+                    to={page.link}
                   >
                     {page.name}
                   </Typography>
@@ -118,8 +123,8 @@ const Header = () => {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href=""
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -135,11 +140,11 @@ const Header = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <a
+              <Link
                 key={page.link}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
-                href={page.link}
+                to={page.link}
                 style={{
                   color: "inherit",
                   textDecoration: "auto",
@@ -148,7 +153,7 @@ const Header = () => {
                 }}
               >
                 {page.name}
-              </a>
+              </Link>
             ))}
           </Box>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
@@ -205,8 +210,14 @@ const Header = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting.link} onClick={handleCloseUserMenu}>
+                  <Typography
+                    textAlign="center"
+                    component={Link}
+                    to={setting.link}
+                  >
+                    {setting.name}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>

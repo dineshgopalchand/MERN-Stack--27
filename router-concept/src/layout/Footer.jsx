@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div  style={{backgroundColor:'blue'}}>Footer</div>
+    <div  style={{backgroundColor:'#989898'}}>&copy; All right reserved.</div>
   )
 }
 
