@@ -1,9 +1,12 @@
-import React from 'react'
+import { Container } from "@mui/material";
+import React from "react";
 
 const Contact = () => {
   return (
-    <div>Contact</div>
-  )
-}
+    <Container className="main-content">
+      <div>Contact</div>
+    </Container>
+  );
+};
 
-export default Contact
+export default Contact;

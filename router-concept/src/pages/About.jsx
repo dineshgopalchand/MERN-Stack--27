@@ -1,9 +1,12 @@
-import React from 'react'
+import { Container } from "@mui/material";
+import React from "react";
 
 const About = () => {
   return (
-    <div>About</div>
-  )
-}
+    <Container className="main-content">
+      <div>About</div>
+    </Container>
+  );
+};
 
-export default About
+export default About;

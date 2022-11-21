@@ -1,10 +1,17 @@
-
-.App{
+.App {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background-color: gray;
+  background-color: rgb(195, 195, 195);
 }
-.main-container{
-  flex:1 1 auto;
+.main-container {
+  flex: 1 1 auto;
+  display: flex;
+}
+.main-container > * {
+  flex: 1 1 auto;
+}
+.main-content {
+  background-color: #ededed;
+  border: 1px solid #989898;
 }
