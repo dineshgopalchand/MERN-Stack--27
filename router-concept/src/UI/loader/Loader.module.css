@@ -1,0 +1,57 @@
+:root {
+    --loader-frame: 1s;
+}
+.loader,
+.loader::before,
+.loader::after {
+    border: 5px solid Tomato;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+}
+.loader {
+    font-size: 100%;
+    position: relative;
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    -webkit-animation: anim-loader var(--loader-frame) ease infinite;
+    animation: anim-loader var(--loader-frame) ease infinite;
+}
+.loader::before,
+.loader::after {
+    content: "";
+    position: absolute;
+}
+.loader::before {
+    inset: 1px;
+    -webkit-animation: anim-loader calc(var(--loader-frame) * 4.3) ease-in infinite;
+    animation: anim-loader calc(var(--loader-frame) * 4.3) ease-in infinite;
+}
+.loader::after {
+    inset: 7px;
+    -webkit-animation: anim-loader calc(var(--loader-frame) * 1.51) ease-out infinite;
+    animation: anim-loader calc(var(--loader-frame) * 1.51) ease-out infinite;
+}
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+@-webkit-keyframes anim-loader {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+@keyframes anim-loader {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}

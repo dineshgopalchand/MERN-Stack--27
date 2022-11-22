@@ -15,3 +15,18 @@
   background-color: #ededed;
   border: 1px solid #989898;
 }
+
+.main-content {
+  display: flex;
+}
+.dashboard-sidebar,
+.dashboard-main {
+  border: 1px solid gray;
+}
+.dashboard-sidebar {
+  width: 150px;
+}
+.dashboard-main {
+  flex: 1;
+  padding: 5px;
+}

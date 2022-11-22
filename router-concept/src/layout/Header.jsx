@@ -14,7 +14,8 @@ import { Badge, Menu } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../store/AuthProvider";
 
 const pages = [
   { name: "Home", link: "home" },
@@ -26,13 +27,14 @@ const settings = [
   { name: "Profile", link: "profile" },
   { name: "Account", link: "account" },
   { name: "Dashboard", link: "dashboard" },
-  { name: "Logout", link: "logout" },
 ];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const { isLogin, userLogoutHandler } = useAuth();
+  const navigate = useNavigate();
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -214,12 +216,32 @@ const Header = () => {
                   <Typography
                     textAlign="center"
                     component={Link}
-                    to={setting.link}
+                    to={`user/${setting.link}`}
                   >
                     {setting.name}
                   </Typography>
                 </MenuItem>
               ))}
+
+              <MenuItem onClick={handleCloseUserMenu}>
+                {isLogin === true ? (
+                  <Typography
+                    textAlign="center"
+                    component="button"
+                    onClick={() => userLogoutHandler()}
+                  >
+                    Logout
+                  </Typography>
+                ) : (
+                  <Typography
+                    textAlign="center"
+                    component="button"
+                    onClick={() => navigate("/login")}
+                  >
+                    Login
+                  </Typography>
+                )}
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
