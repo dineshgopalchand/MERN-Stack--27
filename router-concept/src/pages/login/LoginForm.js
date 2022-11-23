@@ -1,11 +1,7 @@
-import React from 'react';
-import { useReducer } from 'react';
-import { useContext } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../store/auth-context';
-import Loader from '../../UI/loader/Loader'
+import Loader from '../../UI/loader/Loader';
 import styles from './LoginForm.module.css';
 const ACTION = {
     update_email: 'UPDATE_EMAIL_VALUE',
@@ -40,6 +36,10 @@ const loginFormReducer = (state, action) => {
 
 const LoginForm = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const refUrl = params.get('ref');
+    // console.log(ref);
     const { userLoginHandler } = useContext(AuthContext);
     const formInit = {
         email: {
@@ -115,7 +115,7 @@ const LoginForm = () => {
                 error: false,
                 message: response.message
             });
-            return navigate('/user');
+            return navigate(refUrl ? refUrl : '/user');
         }
 
     }

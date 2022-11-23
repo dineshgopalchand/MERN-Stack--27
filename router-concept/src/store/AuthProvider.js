@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext, initLoginState } from "./auth-context";
 
 const AuthProvider = (props) => {
@@ -37,7 +37,10 @@ const AuthProvider = (props) => {
 };
 const RequireAuth = ({ children }) => {
     const { isLogin } = useAuth();
-    return isLogin === true ? children : <Navigate to={`/login`} />;
+    const location=useLocation();
+    // console.log(location);
+    const {pathname}=location;
+    return isLogin === true ? children : <Navigate to={`/login${pathname?'?ref='+pathname:''}`} />;
 }
 const NoLoggedInAuth = ({ children }) => {
     const { isLogin } = useAuth();
