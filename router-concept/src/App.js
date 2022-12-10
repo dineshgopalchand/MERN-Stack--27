@@ -8,9 +8,9 @@ import './App.css';
 import MainLayout from './layout/MainLayout';
 import UserLayout from './layout/UserLayout';
 import About from './pages/About';
-import Contact from './pages/Contact';
+// import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
-import Home from './pages/Home';
+// import Home from './pages/Home';
 import NotFound from './pages/not-found/NotFound';
 import Profile from './pages/Profile';
 import Account from './pages/Account';
@@ -19,8 +19,10 @@ import ServiceList from './pages/services/ServiceList';
 import Services from './pages/services/Services';
 import Login from './pages/login/Login';
 import { NoLoggedInAuth, RequireAuth } from './store/AuthProvider';
+import React, { Suspense } from 'react';
 
-
+const HomeLazy = React.lazy(() => import('./pages/Home'));
+const ContactLazy = React.lazy(() => import('./pages/Contact'));
 
 function App() {
 
@@ -28,13 +30,22 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home />} />
+          <Route index element={(
+            <Suspense fallback={<div style={{ textAlign: 'center' }}>Loading....</div>}>
+              <HomeLazy />
+            </Suspense>
+          )} />
           <Route path="home" element={<Navigate to="/" />} />
           <Route path="Services" element={<Services />} >
             <Route index element={<ServiceList />} />
             <Route path=":id/:type" element={<ServiceDetails />} />
           </Route>
-          <Route path="contact" element={<Contact />} />
+          {/* <Route path="contact" element={<Contact />} /> */}
+          <Route path="contact" element={(
+            <Suspense fallback={<div style={{ textAlign: 'center' }}>Loading....</div>}>
+              <ContactLazy />
+            </Suspense>
+          )} />
           <Route path="about" element={<About />} />
           <Route path="login" element={
             <NoLoggedInAuth>
