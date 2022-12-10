@@ -1,0 +1,18 @@
+it is a scripting language
+scripting Lang: interpreted language
+
+scripting Lang: JavaScript, PHP,Python,ASP,JSP,perl,goLang
+Programming Lang: Java,C,C++,C#
+
+code ->interpret->result
+code ->compiled->excutable code->excute -> result
+
+
+Event Driven Lang
+Single threaded
+Event Loop
+
+Ryan Dhal
+V8 + C++ -> NodeJS
+
+
