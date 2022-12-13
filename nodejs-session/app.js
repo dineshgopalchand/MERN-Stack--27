@@ -1,33 +1,29 @@
-const http = require('http');
-var fs = require('fs');
-const { uuid } = require('uuidv4');
-const url=require('url');
-console.log(uuid());
-
+// const http = require('http');
+// var fs = require('fs');
+// const { uuid } = require('uuidv4');
+// const url=require('url');
+const express= require('express');
+// console.log(uuid());
 const port = process.env.port || 8000;
 
-const server = http.createServer((req, res) => {
-  console.log(req.url);
-  // const urlVal =new URL ('http://localhost:8000'+req.url);
-  const urlVal =url.parse(req.url);
-  const pathname=urlVal.pathname;
-  if(pathname=='/'){
-    res.setHeader('status', 200);
-    res.setHeader('content-type', 'text/plain');
-    return res.end('Home page');
-  }else if(pathname=='/about'){
-    res.setHeader('status', 200);
-    res.setHeader('content-type', 'text/plain');
-    return res.end('About');
-  }else if(pathname=='/contact'){
-    res.setHeader('status', 200);
-    res.setHeader('content-type', 'text/plain');
-    return res.end('Contact');
-  }
-  res.setHeader('status', 200);
-  res.setHeader('content-type', 'text/plain');
-  res.end('Not Found');
-});
-server.listen(port, () => {
+const app=express();
+app.get('/', function (req, res) {
+  console.log(req.method)
+  res.send('GET-Hello World')
+})
+app.post('/', function (req, res) {
+  console.log(req.method)
+  res.send('POST - Hello World')
+})
+app.delete('/', function (req, res) {
+  console.log(req.method)
+  res.send('Delete - Hello World')
+})
+app.get('/about', function (req, res) {
+  res.send('GET- About- Hello World')
+})
+app.listen(port, () => {
   console.log(`Server started at http://localhost:${port}`);
 });
+
+ 
